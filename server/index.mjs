@@ -1,0 +1,2 @@
+import {createApp} from './app.mjs';import {getConfig} from './config.mjs';
+const config=getConfig(),app=createApp(config);app.server.listen(config.port,config.host,()=>console.log(`Velcodes portal listening on ${config.host}:${config.port}. Email delivery ${config.emailProvider==='resend'&&config.resendKey?'enabled':'disabled; messages remain queued'}.`));for(const signal of ['SIGINT','SIGTERM'])process.on(signal,async()=>{await app.close();process.exit(0)});

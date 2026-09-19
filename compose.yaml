@@ -1,0 +1,19 @@
+services:
+  portal:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      DATABASE_PATH: /app/data/velcodes.sqlite
+      SITE_DIRECTORY: /app/site
+    ports:
+      - "127.0.0.1:4180:4180"
+    volumes:
+      - portal-data:/app/data
+      - portal-access:/app/.local
+      - ./site:/app/site:ro
+volumes:
+  portal-data:
+  portal-access:

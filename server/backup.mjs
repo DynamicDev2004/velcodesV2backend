@@ -1,0 +1,2 @@
+import {DatabaseSync,backup} from 'node:sqlite';import {mkdirSync} from 'node:fs';import {resolve} from 'node:path';import {getConfig} from './config.mjs';
+const config=getConfig(),db=new DatabaseSync(config.databasePath),folder=resolve('data/backups');mkdirSync(folder,{recursive:true,mode:0o700});const destination=resolve(folder,'velcodes-'+new Date().toISOString().replace(/[:.]/g,'-')+'.sqlite');await backup(db,destination);db.close();console.log('Consistent database backup created:',destination);
